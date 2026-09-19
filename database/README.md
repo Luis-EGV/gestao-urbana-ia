@@ -1,4 +1,4 @@
-# Banco de Dadosa
+# Banco de Dados
 
 Esta pasta contém os arquivos necessários para configurar o PostgreSQL utilizado pelo Sistema de Gestão Urbana.
 
