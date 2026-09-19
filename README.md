@@ -1,79 +1,294 @@
 # Sistema de Gestão Urbana com Inteligência Artificial
 
-Sistema desenvolvido para auxiliar no registro, análise, priorização e gerenciamento de ocorrências urbanas.
+Sistema para registro, análise, priorização e gerenciamento de ocorrências urbanas.
 
-O projeto utiliza Inteligência Artificial para analisar imagens e informações enviadas pelos cidadãos, gerando um Índice de Prioridade Urbana (IPU) para auxiliar os gestores na identificação das ocorrências que necessitam de maior atenção.
+O projeto utiliza Inteligência Artificial para analisar as informações enviadas pelos cidadãos e calcular um **Índice de Prioridade Urbana (IPU)**, auxiliando o gestor na organização das ocorrências.
 
-## Tecnologias utilizadas
+## Tecnologias
 
 ### Backend
 - Python
 - FastAPI
 - SQLAlchemy
-- PostgreSQL
 
 ### Inteligência Artificial
 - YOLOv8
-- Análise de imagem
+- Modelo treinado `best.pt`
 - Análise textual
 - Análise de contexto
 - Índice de Prioridade Urbana (IPU)
 
-### Frontend
+### Banco de dados
+- PostgreSQL
+
+### Painel
 - React
 - Vite
 - JavaScript
 - HTML
 - CSS
 
-## Funcionamento do sistema
+---
 
-O fluxo principal do sistema é:
+# Estrutura
 
-1. O cidadão registra uma ocorrência urbana.
-2. Uma foto da ocorrência é enviada.
-3. A localização é obtida através de GPS.
-4. O cidadão fornece uma descrição do problema.
-5. A API recebe os dados da ocorrência.
-6. O YOLO analisa a imagem.
-7. O sistema analisa a descrição e o contexto da ocorrência.
-8. O Índice de Prioridade Urbana (IPU) é calculado.
-9. A ocorrência é armazenada no PostgreSQL.
-10. O gestor visualiza as ocorrências através do painel web.
+```text
+gestao-urbana-ia/
+│
+├── backend/
+│   └── API FastAPI e regras do sistema
+│
+├── database/
+│   └── Script para criação do banco
+│
+├── modelo/
+│   └── Modelo YOLO treinado
+│
+└── painel-gestor/
+    └── Painel web React
+```
 
-## Índice de Prioridade Urbana
+Cada pasta possui seu próprio `README.md` com instruções específicas.
 
-O IPU é utilizado para auxiliar na priorização das ocorrências.
+---
 
-O cálculo considera informações como:
+# Como executar o projeto
 
-- análise da imagem;
-- confiança da detecção;
-- descrição da ocorrência;
-- contexto da localização.
+Para configurar um computador novo, siga esta ordem:
 
-As ocorrências podem ser classificadas em níveis como:
+## 1. Baixar o projeto
 
-- Mediano
-- Perigoso
-- Risco
+No Git:
 
-As ocorrências com maior IPU aparecem primeiro na fila do gestor.
+```bash
+git clone https://github.com/Luis-EGV/gestao-urbana-ia.git
+```
 
-## Funcionalidades implementadas
+Entre na pasta:
 
-- API REST utilizando FastAPI
-- Integração com PostgreSQL
-- Análise de imagens utilizando YOLOv8
-- Análise da descrição da ocorrência
+```bash
+cd gestao-urbana-ia
+```
+
+Também é possível utilizar **Code > Download ZIP** pelo GitHub.
+
+---
+
+## 2. Configurar o PostgreSQL
+
+Primeiro configure o banco de dados.
+
+Entre na pasta:
+
+```text
+database/
+```
+
+Leia:
+
+```text
+database/README.md
+```
+
+O banco utilizado pelo projeto é:
+
+```text
+gestao_urbana
+```
+
+O arquivo:
+
+```text
+database/database.sql
+```
+
+contém a estrutura necessária para criação da tabela de denúncias.
+
+---
+
+## 3. Configurar o backend
+
+Depois configure:
+
+```text
+backend/
+```
+
+Leia:
+
+```text
+backend/README.md
+```
+
+Será necessário:
+
+1. instalar Python;
+2. instalar as dependências;
+3. criar o arquivo `.env`;
+4. configurar a conexão com PostgreSQL;
+5. iniciar o FastAPI.
+
+Servidor do backend:
+
+```text
+http://127.0.0.1:8000
+```
+
+Swagger:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## 4. Modelo YOLO
+
+O modelo treinado utilizado pelo sistema está disponível em:
+
+```text
+modelo/best.pt
+```
+
+Não é necessário treinar novamente o YOLO para executar a demonstração.
+
+Mais informações:
+
+```text
+modelo/README.md
+```
+
+---
+
+## 5. Iniciar o painel do gestor
+
+Entre em:
+
+```text
+painel-gestor/
+```
+
+Leia:
+
+```text
+painel-gestor/README.md
+```
+
+O painel utiliza React + Vite.
+
+Servidor local:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# Ordem para apresentação
+
+Depois que o computador estiver configurado, para iniciar o sistema novamente basta:
+
+### 1 — verificar se PostgreSQL está funcionando
+
+Banco:
+
+```text
+gestao_urbana
+```
+
+### 2 — abrir o backend
+
+Terminal 1:
+
+```bash
+cd backend
+py -m uvicorn api:app --reload
+```
+
+### 3 — abrir o painel
+
+Terminal 2:
+
+```bash
+cd painel-gestor
+npm run dev
+```
+
+### 4 — abrir no navegador
+
+Painel:
+
+```text
+http://localhost:5173
+```
+
+API:
+
+```text
+http://127.0.0.1:8000
+```
+
+Swagger:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# Arquitetura
+
+```text
+CIDADÃO
+   │
+   │ Foto + descrição + localização
+   ▼
+FASTAPI
+   │
+   ├── YOLOv8
+   │      └── best.pt
+   │
+   ├── Análise textual
+   │
+   ├── Análise de contexto
+   │
+   └── Cálculo do IPU
+   │
+   ▼
+POSTGRESQL
+   │
+   ▼
+PAINEL DO GESTOR
+   │
+   ▼
+Fila de ocorrências por prioridade
+```
+
+---
+
+# Funcionalidades implementadas
+
+- API REST com FastAPI
+- Banco PostgreSQL
+- Modelo YOLOv8 treinado
+- Análise de imagens
+- Análise textual
 - Análise de contexto
-- Cálculo automático do IPU
-- Geração automática de protocolo
-- Armazenamento das denúncias
+- Cálculo do IPU
+- Geração de protocolo
+- Armazenamento de ocorrências
 - Consulta de denúncias
-- Filtros por status e nível
-- Atualização do status das ocorrências
-- Painel web para gestores
-- Integração React com FastAPI
-- Fila de ocorrências ordenada pelo IPU
+- Filtro por status
+- Filtro por nível
+- Alteração de status
+- Painel web React
+- Fila de prioridade por IPU
 - Visualização dos detalhes das ocorrências
+
+---
+
+# Status
+
+Projeto em desenvolvimento.
+
+Novas funcionalidades serão adicionadas ao aplicativo do cidadão e ao painel administrativo.
