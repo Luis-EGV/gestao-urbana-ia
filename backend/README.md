@@ -66,7 +66,8 @@ Swagger:
 http://127.0.0.1:8000/docs
 ```
 
-Mantenha esse terminal aberto enquanto estiver utilizando o sistema.
+Mantenha esse terminal aberto enquanto estiver utilizando o sistema pq se fechar ele derruba, não copia usando (ctrl c) pq fecha a operação
+e é aqui onde a denuncia é feita para ir para o site do gestor (OBS: ele retorna o resultado em texto no código).
 
 ## 6. Próxima etapa
 
