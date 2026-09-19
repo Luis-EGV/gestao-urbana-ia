@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Credenciais
+.env
+*.env
+
+# React
+node_modules/
+dist/
+
+# VS Code
+.vscode/
+
+# YOLO / arquivos pesados
+arquivos_yolo/
+runs/
+Ocorrencias_Urbanas/
+datasets_backup/
+uploads/
+imagens_denuncias/
+*.pt
+
+# Windows
+Thumbs.db
+.DS_Store
