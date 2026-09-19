@@ -34,7 +34,7 @@ Use `.env.example` como referência:
 DATABASE_URL=postgresql+psycopg2://postgres:SUA_SENHA@localhost:5432/gestao_urbana
 ```
 
-Nunca envie sua senha para o GitHub.
+Onde fica SUA_SENHA substitui por uma senha própria.
 
 ## 4. Testar PostgreSQL
 
