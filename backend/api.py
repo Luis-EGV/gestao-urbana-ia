@@ -32,34 +32,22 @@ app.add_middleware(
 
 # MODELO YOLO
 
-model = YOLO(
-    "C:/Yolo/runs/ocorrencias_urbanas_v2-2/weights/best.pt"
-)
+BASE_DIR = Path(__file__).resolve().parent.parent
+CAMINHO_MODELO = BASE_DIR / "modelo" / "best.pt"
+
+model = YOLO(str(CAMINHO_MODELO))
 
 # PASTAS
 
-PASTA_UPLOADS = Path("C:/Yolo/uploads")
-PASTA_UPLOADS.mkdir(
-    parents=True,
-    exist_ok=True
-)
+PASTA_UPLOADS = BASE_DIR / "uploads"
+PASTA_UPLOADS.mkdir(parents=True, exist_ok=True)
 
-PASTA_IMAGENS = Path(
-    "C:/Yolo/imagens_denuncias"
-)
+PASTA_IMAGENS = BASE_DIR / "imagens_denuncias"
+PASTA_IMAGENS.mkdir(parents=True, exist_ok=True)
 
-PASTA_IMAGENS.mkdir(
-    parents=True,
-    exist_ok=True
-)
-
-
-# Permite acessar as imagens pelo navegador/API
 app.mount(
     "/imagens",
-    StaticFiles(
-        directory="C:/Yolo/imagens_denuncias"
-    ),
+    StaticFiles(directory=str(PASTA_IMAGENS)),
     name="imagens"
 )
 

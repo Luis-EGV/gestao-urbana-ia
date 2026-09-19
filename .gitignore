@@ -27,3 +27,7 @@ imagens_denuncias/
 # Windows
 Thumbs.db
 .DS_Store
+
+# Modelos YOLO
+*.pt
+!modelo/best.pt
