@@ -1,16 +1,80 @@
-# React + Vite
+# Painel do Gestor
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Painel web utilizado pelos gestores para visualizar e acompanhar as ocorrências urbanas.
 
-Currently, two official plugins are available:
+Tecnologias:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- Vite
+- JavaScript
+- CSS
 
-## React Compiler
+## Antes de iniciar
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O FastAPI deve estar funcionando em:
 
-## Expanding the Oxlint configuration
+```text
+http://127.0.0.1:8000
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Consulte:
+
+```text
+backend/README.md
+```
+
+## 1. Entrar na pasta
+
+Abra um segundo terminal:
+
+```powershell
+cd painel-gestor
+```
+
+## 2. Instalar dependências
+
+Na primeira execução:
+
+```powershell
+npm install
+```
+
+## 3. Iniciar o painel
+
+```powershell
+npm run dev
+```
+
+O Vite mostrará um endereço semelhante a:
+
+```text
+http://localhost:5173
+```
+
+Abra esse endereço no navegador.
+
+## Servidores durante a apresentação
+
+Mantenha dois terminais abertos.
+
+### Terminal 1
+
+```powershell
+cd backend
+py -m uvicorn api:app --reload
+```
+
+### Terminal 2
+
+```powershell
+cd painel-gestor
+npm run dev
+```
+
+Depois abra:
+
+```text
+http://localhost:5173
+```
+
+O painel buscará as ocorrências através da API FastAPI.
